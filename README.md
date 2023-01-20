@@ -18,6 +18,7 @@ Lecture 2
 Defining and Using Classes 
 
 #### HW0 
+https://github.com/fcfc2021/CS61B/tree/main/HW0
 
 
 ## week 2:
@@ -37,6 +38,7 @@ Intro to Java
 Scope , Pass by Value, Static (Exam Prep)
 
 #### Project 0
+https://github.com/fcfc2021/CS61B/tree/main/project0
 
 ## week 3
 
