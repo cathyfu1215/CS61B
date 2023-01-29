@@ -19,6 +19,8 @@ Defining and Using Classes
 
 #### HW0 
 https://github.com/fcfc2021/CS61B/tree/main/HW0
+####Lab1
+https://github.com/fcfc2021/CS61B/tree/main/Lab1
 
 
 ## week 2:
