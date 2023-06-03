@@ -114,12 +114,95 @@ public class Model extends Observable {
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
 
+
+
+
+        //only press up:
+
+        for(int col=0;col<board.size();col++){ //each col behaves independently
+
+
+            if(allNull(col)||allNUmNoMerge(col)) {
+                System.out.println("nothing changed here!");
+            } else{
+
+
+            /*
+            if top row is null, every one under should go up , merge or not
+            if top row is not null, consider can someone merge with it
+            if cannot merge, check next item , until we reach the last item
+             */
+                for(int fixedRow=board.size()-1;fixedRow>=0;fixedRow--) {
+
+
+                    //if this fixed row is not empty
+
+                    if(board.tile(col,fixedRow)!=null){
+                        for(int belowRow=fixedRow-1;belowRow>=0;){ //find if someone under can merge with it
+                            if(board.tile(col,belowRow)!=null &&
+                                    board.tile(col,belowRow).value()==board.tile(col,fixedRow).value()){
+                                Tile tile=board.tile(col,belowRow);
+                                if(board.move(col,fixedRow,tile)){
+                                    score=score+2*tile.value();
+                                };
+                             break;
+                            }
+                            else{
+                                belowRow--;
+                            }
+                        } //decrease the fixedRow if it did not merge with anyone
+                    }
+                    else{//fixedRow==null
+                        //find the first non-null tile and move it up
+                        for(int under=fixedRow-1;under>=0;under--){
+                            if(board.tile(col,under)!=null){
+                                board.move(col,fixedRow,board.tile(col,under));
+                                break;
+                            }
+                        }
+
+                    }
+
+                }
+                changed=true;
+
+            }
+
+        }
+
+
         checkGameOver();
         if (changed) {
             setChanged();
         }
         return changed;
     }
+
+
+
+    private boolean allNUmNoMerge(int col) {
+        for(int row=board.size()-1;row>=0;row--){
+            if(board.tile(col,row)==null){
+                return false;
+            }
+            else{
+                if(row-1>=0&&board.tile(col,row-1)!=null&&board.tile(col,row).value()==board.tile(col,row-1).value()){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean allNull(int col) {
+        for(int row=board.size()-1;row>=0;row--){
+            if(board.tile(col,row)!=null){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     /** Checks if the game is over and sets the gameOver variable
      *  appropriately.
