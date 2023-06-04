@@ -113,88 +113,71 @@ public class Model extends Observable {
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
-
-
-
+        String boardBefore=board.toString();
+        board.setViewingPerspective(side);
 
         //only press up:
+        //modify here
 
         for(int col=0;col<board.size();col++){ //each col behaves independently
-            if(allNull(col)||allNUmNoMerge(col)) {
-                //System.out.println("nothing changed here!");
-            } else{
-                for(int fixedRow=board.size()-1;fixedRow>=0;fixedRow--) {
-                    //if this fixed row is not empty
-                    if(board.tile(col,fixedRow)!=null){
-                        //find if someone under can merge with the current top tile
-                        for(int belowRow=fixedRow-1;belowRow>=0;){
-                            if(board.tile(col,belowRow)!=null &&
-                                    board.tile(col,belowRow).value()==board.tile(col,fixedRow).value()){
-                                Tile tile=board.tile(col,belowRow);
-                                if(board.move(col,fixedRow,tile)){
-                                    score=score+2*tile.value();
-                                };
-                                break;
-                            }
-                            else{//cannot merge with the current top
-                                if(board.tile(col,belowRow)!=null&&
-                                        board.tile(col,belowRow).value()!=board.tile(col,fixedRow).value()){
-                                    break;
-                                }
-                                if(board.tile(col,belowRow)==null){
-                                    belowRow--;
-                                }
-                            }
-                        }
+
+            for(int fixR=board.size()-1;fixR>=0;fixR--){ //decreasing this means finish processing a row
+                if(board.tile(col,fixR)!=null){
+                    //I have value, can someone under merge with me?
+                    int target=fixR-1;
+                    while(target>=0&&board.tile(col,target)==null){ //skip the null tiles
+                        target--;
                     }
-                    else{//fixedRow==null
-                        //find the first non-null tile and move it up
-                        for(int under=fixedRow-1;under>=0;under--){
-                            Tile underTile=board.tile(col,under);
-                            if(underTile!=null){
-                                if(board.move(col,fixedRow,underTile)){
-                                    score=score+2*underTile.value();
-                                };
-                            }
-                        }
+                    if(target>=0&&board.tile(col,target)!=null&&board.tile(col,target).value()==board.tile(col,fixR).value()){
+                        score=score+2*board.tile(col,target).value();
+                        board.move(col,fixR,board.tile(col,target));
+                        //next row
                     }
+                    else{
+                        //no one merge with me, next row
+                    }
+
                 }
-                changed=true;
+                else{
+                    //I have no value. Can someone under move to me?
+                    int target=fixR-1;
+                    while(target>=0&&board.tile(col,target)==null){ //skip the null tiles
+                        target--;
+                    }
+                    if(target>=0&&board.tile(col,target)!=null){
+                        board.move(col,fixR,board.tile(col,target));
+                        fixR++;
+                    }
+
+                }
             }
+
+
         }
 
 
+
+
+    // below are right, do not touch
+
+        board.setViewingPerspective(Side.NORTH);
+        String boardAfter=board.toString();
+        if(!boardBefore.equals(boardAfter)){
+            changed=true;
+        }
         checkGameOver();
         if (changed) {
             setChanged();
         }
+
         return changed;
     }
 
 
 
-    private boolean allNUmNoMerge(int col) {
-        for(int row=board.size()-1;row>=0;row--){
-            if(board.tile(col,row)==null){
-                return false;
-            }
-            else{
-                if(row-1>=0&&board.tile(col,row-1)!=null&&board.tile(col,row).value()==board.tile(col,row-1).value()){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
-    private boolean allNull(int col) {
-        for(int row=board.size()-1;row>=0;row--){
-            if(board.tile(col,row)!=null){
-                return false;
-            }
-        }
-        return true;
-    }
+
+
 
 
     /** Checks if the game is over and sets the gameOver variable
