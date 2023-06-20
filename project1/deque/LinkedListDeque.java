@@ -6,6 +6,13 @@ public class LinkedListDeque<T> implements Iterable<T> {
     private int size;
     private Node sentinel;
 
+
+
+    public LinkedListDeque(){
+        size=size;
+        sentinel=new Node(null,null,null);
+    }
+
     public class Node{
         public T item;
         public Node next;
@@ -17,13 +24,6 @@ public class LinkedListDeque<T> implements Iterable<T> {
             this.prev = p;
         }
     }
-
-    public LinkedListDeque(){
-        size=size;
-        sentinel=new Node(null,null,null);
-    }
-
-
     //methods
 
     public void addFirst(T item){
@@ -68,11 +68,11 @@ public class LinkedListDeque<T> implements Iterable<T> {
         Node p=sentinel;
         int count=0;
         while(p.next != null && count<size){
-            System.out.println(p.next.item);
+            System.out.print(p.next.item+" ");
             p=p.next;
             count++;
         }
-        System.out.println('\n'); //an empty line?
+        System.out.println('\n'); //an empty line
     }
 
     public T removeFirst(){
@@ -131,8 +131,16 @@ public class LinkedListDeque<T> implements Iterable<T> {
     }
 
     public T getRecursive(int index){
-        return null;
+       return getRecursiveNode(index).item;
+    }
 
+    private Node getRecursiveNode(int index){
+        if(index == 0){
+            return sentinel.next;
+        }
+        else{
+            return getRecursiveNode(index-1).next;
+        }
     }
 
     public Iterator<T> iterator(){
@@ -140,19 +148,21 @@ public class LinkedListDeque<T> implements Iterable<T> {
     }
 
     private class LinkedListDequeIterator implements Iterator<T> {
-        T curr;
+        Node curr= sentinel.next;
         public boolean hasNext(){
-            return false;
+            return curr !=null;
         }
         public T next(){
-            return null;
+            Node temp=curr;
+            curr=curr.next;
+            return temp.item;
         }
     }
 
 
 
     public boolean equals(Object o){
-        return false;
+       return false;  //implement and test this later
     }
 
 
