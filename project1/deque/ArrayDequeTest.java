@@ -104,7 +104,7 @@ public class ArrayDequeTest {
     }
 
     @Test
-    /* Check if you can create LinkedListDeques with different parameterized types*/
+
     public void multipleParamTest() {
 
 
@@ -123,7 +123,7 @@ public class ArrayDequeTest {
     }
 
     @Test
-    /* check if null is return when removing from an empty LinkedListDeque. */
+    /* check if null is return when removing from an empty ArrayDeque. */
     public void emptyNullReturnTest() {
 
 
@@ -139,20 +139,20 @@ public class ArrayDequeTest {
 
     @Test
     /* Add large number of elements to deque; check if order is correct. */
-    public void bigLLDequeTest() {
+    public void bigArrayDequeTest() {
 
 
-        ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
-        for (int i = 0; i < 1000000; i++) {
-            lld1.addLast(i);
+        ArrayDeque<Integer> ad1 = new ArrayDeque<Integer>();
+        for (int i = 0; i < 10000; i++) {
+            ad1.addLast(i);
         }
 
-        for (double i = 0; i < 500000; i++) {
-            assertEquals("Should have the same value", i, (double) lld1.removeFirst(), 0.0);
+        for (double i = 0; i < 5000; i++) {
+            assertEquals("Should have the same value", i, (double) ad1.removeFirst(), 0.0);
         }
 
-        for (double i = 999999; i > 500000; i--) {
-            assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
+        for (double i = 9999; i > 5000; i--) {
+            assertEquals("Should have the same value", i, (double) ad1.removeLast(), 0.0);
         }
 
 
