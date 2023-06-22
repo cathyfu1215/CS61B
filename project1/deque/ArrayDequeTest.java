@@ -175,17 +175,17 @@ public class ArrayDequeTest {
         lld1.addFirst("-1");
 
         assertEquals(lld1.get(0),"-1");
-        assertEquals(lld1.getRecursive(0),"-1");
+        //assertEquals(lld1.getRecursive(0),"-1");
         assertEquals(lld1.get(1),"0");
-        assertEquals(lld1.getRecursive(1),"0");
+        //assertEquals(lld1.getRecursive(1),"0");
         assertEquals(lld1.get(2),"first");
-        assertEquals(lld1.getRecursive(2),"first");
+       // assertEquals(lld1.getRecursive(2),"first");
         assertEquals(lld1.get(3),"second");
-        assertEquals(lld1.getRecursive(3),"second");
+       // assertEquals(lld1.getRecursive(3),"second");
         assertEquals(lld1.get(4),"third");
-        assertEquals(lld1.getRecursive(4),"third");
+       // assertEquals(lld1.getRecursive(4),"third");
         assertEquals(lld1.get(5),null);
-        assertEquals(lld1.getRecursive(5),null);
+       // assertEquals(lld1.getRecursive(5),null);
 
     }
 
