@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class LinkedListDeque<T> implements Iterable<T> {
+public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
     private int size;
     private Node sentinel;
 
@@ -131,7 +131,13 @@ public class LinkedListDeque<T> implements Iterable<T> {
     }
 
     public T getRecursive(int index){
-       return getRecursiveNode(index).item;
+        if(index<size) {
+            return getRecursiveNode(index).item;
+        }
+        else{
+            System.out.println("out of range!");
+            return null;
+        }
     }
 
     private Node getRecursiveNode(int index){
@@ -139,10 +145,11 @@ public class LinkedListDeque<T> implements Iterable<T> {
             return sentinel.next;
         }
         else{
-            return getRecursiveNode(index-1).next;
+            return getRecursiveNode(index - 1).next;
         }
     }
 
+    @Override
     public Iterator<T> iterator(){
         return new LinkedListDequeIterator();
     }
@@ -162,7 +169,12 @@ public class LinkedListDeque<T> implements Iterable<T> {
 
 
     public boolean equals(Object o){
-       return false;  //implement and test this later
+        if(o instanceof LinkedListDeque){
+            return true; //need to iterate here comparing all nodes
+        }
+        else{
+            return false;
+        }
     }
 
 

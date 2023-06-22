@@ -2,11 +2,13 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Iterable<T> {
+public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
 
     int size=0;
     int MAXSIZE=8;
     int RFACTOR=2;
+
+    int UFACTOR=4;
     T[] array = (T []) new Object [MAXSIZE];  //cast here
 
     int head ;
@@ -21,6 +23,7 @@ public class ArrayDeque<T> implements Iterable<T> {
         tail = 0;
 
     }
+
 
     public void addFirst(T item){
         T[] doubleArray;
@@ -84,7 +87,13 @@ public class ArrayDeque<T> implements Iterable<T> {
       }
       else {
           T temp = array[0];
-          T[] newArray = (T[]) new Object[MAXSIZE];
+          T[] newArray;
+          if(size-1>=MAXSIZE/UFACTOR){
+              newArray = (T[]) new Object[MAXSIZE];
+          }
+          else{
+              newArray = (T[]) new Object[MAXSIZE / UFACTOR];
+          }
           System.arraycopy(array, 1, newArray, 0, size - 1);
           array = newArray;
           size--;
@@ -97,11 +106,23 @@ public class ArrayDeque<T> implements Iterable<T> {
         if(size <1){
             return null;
         }
-        T  temp=array[size-1];
-        array[size]=null;
-        tail--;
-        size--;
-        return temp;
+        else{
+            T  temp=array[size-1];
+            if(size-1>=MAXSIZE/UFACTOR){
+                array[size]=null;
+                tail--;
+                size--;
+            }
+            else{
+                T[] newArray = (T[]) new Object[MAXSIZE / UFACTOR];
+                System.arraycopy(array, 0, newArray, 0, size - 1);
+                array=newArray;
+                size--;
+                tail--;
+            }
+            return temp;
+        }
+
     }
 
     public T get(int index){
@@ -113,25 +134,14 @@ public class ArrayDeque<T> implements Iterable<T> {
       }
     }
 
-    public T getRecursive(int index){  //how to get recursive here??? It doesn't make sense.
-
-        if(index>=size){
-            return null;
-        }
-        else{
-            return array[index];
-        }
 
 
-    }
 
-    @Override
     public Iterator<T> iterator() {
         return new ArrayDequeIterator();
     }
 
-    private class ArrayDequeIterator implements Iterator<T> {
-
+    private class ArrayDequeIterator<T> implements Iterator<T> {
         int curr;
         public ArrayDequeIterator(){
             curr=head;
@@ -140,13 +150,18 @@ public class ArrayDeque<T> implements Iterable<T> {
             return curr<size;
         }
         public T next(){
-            T temp=array[curr];
+            T temp= (T) array[curr];
             curr++;
             return temp;
         }
     }
 
     public boolean equals(Object o){
-        return false;  //implement and test this later
+        if(o instanceof ArrayDeque){
+           return true; //need iteration here comparing all values
+        }
+        else{
+            return false;
+        }
     }
 }
