@@ -193,5 +193,41 @@ public class LinkedListDequeTest {
         assertEquals(lld1.getRecursive(5),null);
 
     }
+    @Test
+    public void equalsTest(){
+        LinkedListDeque<Integer> lld1=new LinkedListDeque<>();
+        LinkedListDeque<Integer> lld2=new LinkedListDeque<>();
+        LinkedListDeque<Integer> lld3=new LinkedListDeque<>();
+        LinkedListDeque<Integer> lld4=new LinkedListDeque<>();
+        ArrayDeque<Integer> lld5= new ArrayDeque<>();
+
+        lld1.addFirst(10);
+        lld1.addLast(19);
+        lld1.addFirst(9);
+
+        lld2.addFirst(10); //exact same object
+        lld2.addLast(19);
+        lld2.addFirst(9);
+
+        lld3.addFirst(100); //contains different value
+        lld3.addLast(19);
+        lld3.addFirst(9);
+
+        lld4.addFirst(100); //of different size
+        lld4.addLast(19);
+        lld4.addFirst(9);
+        lld4.addFirst(99);
+
+        lld5.addFirst(10); //contains same value, but belong to different class
+        lld5.addLast(19);
+        lld5.addFirst(9);
+
+        assertEquals(true,lld1.equals(lld2));
+        assertEquals(false,lld1.equals(lld3));
+        assertEquals(false,lld1.equals(lld4));
+        assertEquals(false,lld1.equals(lld5));
+
+
+    }
 
 }

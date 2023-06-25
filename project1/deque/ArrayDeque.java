@@ -157,10 +157,22 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
     }
 
     public boolean equals(Object o){
-        if(o instanceof ArrayDeque){
-           return true; //need iteration here comparing all values
+        if(o instanceof ArrayDeque) { //if they belong to the same class
+
+            if(((ArrayDeque<T>) o).size()!= size){ //if not of same length, no equal
+                return false;
+            }
+            else{
+                for(int index=0;index<size;index++){
+                    if(array[index] != ((ArrayDeque<T>) o).get(index)){
+                        return false;
+                    }
+                }
+                return true;
+            }
+
         }
-        else{
+        else{// not belong to same class
             return false;
         }
     }
