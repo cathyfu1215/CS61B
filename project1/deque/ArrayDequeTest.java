@@ -189,6 +189,44 @@ public class ArrayDequeTest {
 
     }
 
+    public void equalsTest(){
+        ArrayDeque<Integer> ad1 =new ArrayDeque<>();
+        ArrayDeque<Integer> ad2 =new ArrayDeque<>();
+        ArrayDeque<Integer> ad3 =new ArrayDeque<>();
+        ArrayDeque<Integer> ad4 =new ArrayDeque<>();
+        LinkedListDeque<Integer> ad5 =new LinkedListDeque<>();
+
+
+
+        ad1.addFirst(10);
+        ad1.addLast(19);
+        ad1.addFirst(9);
+
+        ad2.addFirst(10); //exact same object
+        ad2.addLast(19);
+        ad2.addFirst(9);
+
+        ad3.addFirst(100); //contains different value
+        ad3.addLast(19);
+        ad3.addFirst(9);
+
+        ad4.addFirst(100); //of different size
+        ad4.addLast(19);
+        ad4.addFirst(9);
+        ad4.addFirst(99);
+
+        ad5.addFirst(10); //contains same value, but belong to different class
+        ad5.addLast(19);
+        ad5.addFirst(9);
+
+        assertEquals(true,ad1.equals(ad2));
+        assertEquals(false,ad1.equals(ad3));
+        assertEquals(false,ad1.equals(ad4));
+        assertEquals(false,ad1.equals(ad5));
+
+
+    }
+
 
 
 }
