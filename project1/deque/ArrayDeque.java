@@ -6,9 +6,8 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
 
     int size=0;
     int MAXSIZE=8;
-    int RFACTOR=2;
-
-    int UFACTOR=4;
+    int RFACTOR=2;  //the multiplier used in resizing
+    int UFACTOR=4;  //the divider used in resizing
     T[] array = (T []) new Object [MAXSIZE];  //cast here
 
     int head ;
@@ -49,9 +48,9 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
         return size;
     }
 
-    public boolean isEmpty(){
-        return size == 0;
-    }
+//    public boolean isEmpty(){  //using the Deque interface's default method
+//        return size == 0;
+//    }
 
     public void addLast( T item ){
         if(size > MAXSIZE-1){

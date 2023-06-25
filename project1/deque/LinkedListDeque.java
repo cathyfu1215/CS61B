@@ -58,7 +58,7 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
 
 
     }
-    public boolean isEmpty(){return size==0;}
+//    public boolean isEmpty(){return size==0;} //using the interface's default method
 
     public int size(){
         return size;
