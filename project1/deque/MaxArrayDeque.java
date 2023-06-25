@@ -6,9 +6,9 @@ import java.util.Iterator;
 public class MaxArrayDeque<T> implements Deque<T>,Iterable<T>{
     int size=0;
     int MAXSIZE=8;
-    int RFACTOR=2;
+    int RFACTOR=2; //multiplier used in resizing
 
-    int UFACTOR=4;
+    int UFACTOR=4; //divider used in resizing
     T[] array = (T []) new Object [MAXSIZE];  //cast here
 
     int head ;
@@ -158,12 +158,7 @@ public class MaxArrayDeque<T> implements Deque<T>,Iterable<T>{
 
     //this method will not be tested, so just put it here for completeness
     public boolean equals(Object o){
-        if(o instanceof ArrayDeque){
-            return true; //need iteration here comparing all values
-        }
-        else{
-            return false;
-        }
+       return false;
     }
 
 
