@@ -9,11 +9,11 @@ import static capers.Utils.*;
 /** Represents a dog that can be serialized.
  * @author Phoenix
 */
-public class Dog implements Serializable { // TODO
+public class Dog  implements Serializable { // TODO
 
     /** Folder that dogs live in. */
-    static final File DOG_FOLDER = join(".capers","dogs"); // TODO (hint: look at the `join`
-                                                                        //      function in Utils)
+    static final File DOG_FOLDER = join(".capers","dogs");
+
 
 
     /** Age of dog. */
@@ -42,7 +42,6 @@ public class Dog implements Serializable { // TODO
      * @return Dog read from file
      */
     public static Dog fromFile(String name) {
-        // TODO (hint: look at the Utils file)
         File filename=join(".capers","dogs",name);
         Dog d= readObject(filename,Dog.class);
         return d;
@@ -61,11 +60,9 @@ public class Dog implements Serializable { // TODO
      * Saves a dog to a file for future use.
      */
     public void saveDog() throws IOException {
-        // TODO (hint: don't forget dog names are unique)
-        Dog dogToSave=new Dog(name,breed,age);
-        File dogFile= join(".capers","dogs",name);
-        dogFile.createNewFile();
-        writeObject(dogFile,Utils.serialize((Serializable) dogToSave));
+        File dogFile= join(".capers","dogs",this.name);
+        writeObject(dogFile,this);
+
     }
 
     @Override
