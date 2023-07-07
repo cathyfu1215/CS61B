@@ -35,7 +35,6 @@ public class CapersRepository {
      *    - story -- file containing the current story
      */
     public static void setupPersistence() throws IOException {
-        // TODO
         CAPERS_FOLDER.mkdir();
         DOG_FOLDER.mkdir();
         story.createNewFile();
@@ -46,9 +45,11 @@ public class CapersRepository {
      * to a file called `story` in the .capers directory.
      * @param text String of the text to be appended to the story
      */
-    public static void writeStory(String text) {
-        writeContents(story,readContentsAsString(story),"\n",text);
+    public static void writeStory(String text) { //how to insert a new line here?
+        writeContents(story,readContentsAsString(story),text);
+        writeContents(story,readContentsAsString(story),"\n");
         System.out.println(readContentsAsString(story));
+
     }
 
     /**
@@ -57,7 +58,6 @@ public class CapersRepository {
      * Also prints out the dog's information using toString().
      */
     public static void makeDog(String name, String breed, int age) throws IOException {
-        // TODO
         Dog dog=new Dog(name,breed,age);
         dog.saveDog();
         String thingsToBark=dog.toString();
@@ -70,10 +70,13 @@ public class CapersRepository {
      * Chooses dog to advance based on the first non-command argument of args.
      * @param name String name of the Dog whose birthday we're celebrating.
      */
-    public static void celebrateBirthday(String name) {
+    public static void celebrateBirthday(String name) throws IOException {
         Dog birthdayDog= fromFile(name);
         birthdayDog.haveBirthday();
-
-
+        try {
+            birthdayDog.saveDog();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
