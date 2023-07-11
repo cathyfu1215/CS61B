@@ -80,6 +80,10 @@ public class TestBSTMap {
         assertTrue(b.containsKey("hi") && b.get("hi") != null);
         b.put("high", 12);
         assertTrue(b.containsKey("high") && b.get("high") != null);
+        b.put("high", 125);
+        assertTrue(b.containsKey("high") && b.get("high").equals(125));
+        b.put("low", 3);
+        assertTrue(b.containsKey("low") && b.get("low").equals(3));
     }
 
     //assumes put works
@@ -90,6 +94,10 @@ public class TestBSTMap {
         assertTrue(b.containsKey("hi"));
         b.put("high", null);
         assertTrue(b.containsKey("high"));
+        assertFalse(b.containsKey("highfive"));
+        b.put("highfive", null);
+        assertTrue(b.containsKey("highfive"));
+
     }
 
 }
