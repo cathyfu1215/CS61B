@@ -92,6 +92,7 @@ Asymptotics I
 #### Discussion: Polymorphism, Iterators, and Iterables
 
 #### Project 2 
+https://github.com/fcfc2021/CS61B/tree/main/proj2
 
 
 ## week 6:
@@ -122,5 +123,24 @@ Hashing
 #### Discussion: ADTs and Asymptotics II
 
 #### Lab 7 BSTMap 🚀
+https://github.com/fcfc2021/CS61B/tree/main/lab7
+
+
+## week 8:
+Lecture 20 
+Heaps and PQs
+
+Lecture 21
+Tree and Graph Traversals
+
+Lecture 22
+Graph Traversals and Implementationas
+
+#### Discussion: B-trees, Red-Black Trees and Hashing
+
+#### Lab 8 HashMap
+https://github.com/fcfc2021/CS61B/tree/main/lab8
+
+
 
  
