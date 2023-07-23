@@ -138,7 +138,7 @@ Graph Traversals and Implementationas
 
 #### Discussion: B-trees, Red-Black Trees and Hashing
 
-#### Lab 8 HashMap 🚀
+#### Lab 8 HashMap ✅
 https://github.com/fcfc2021/CS61B/tree/main/lab8
 
 
